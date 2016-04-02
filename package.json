@@ -1,0 +1,65 @@
+{
+  "name": "rethinkdb-primus",
+  "version": "0.0.0",
+  "description": "Use rethinkdb over a primus connection",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run build && npm run test-server",
+    "test-server": "PORT=3001 istanbul cover _mocha ./test && istanbul --text check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
+    "test-server-no-cov": "PORT=3001 mocha ./test",
+    "test-watch": "PORT=3001 nodemon -x npm run test-server-no-cov",
+    "build": "make build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tjmehta/rethinkdb-primus.git"
+  },
+  "keywords": [
+    "rethinkdb",
+    "websocket",
+    "browser",
+    "polling",
+    "socket",
+    "client",
+    "server",
+    "rethink",
+    "web"
+  ],
+  "browser": {
+    "net": "./src/net-tls-mock.js",
+    "tls": "./src/net-tls-mock.js"
+  },
+  "author": "Tejesh Mehta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tjmehta/rethinkdb-primus/issues"
+  },
+  "homepage": "https://github.com/tjmehta/rethinkdb-primus",
+  "dependencies": {
+    "binary-pack": "^1.0.2",
+    "call-me-maybe": "^1.0.1",
+    "debug": "^2.2.0",
+    "keypather": "^2.0.0",
+    "listen-all": "^1.0.0",
+    "object-loops": "^0.5.2",
+    "propagate": "tjmehta/propagate#support-event-map",
+    "rethinkdb-stream-chunker": "^0.6.1",
+    "rethinkdb-validator-stream": "^1.1.1",
+    "shimmer": "^1.1.0"
+  },
+  "devDependencies": {
+    "assert-env": "^0.6.0",
+    "browserify": "^13.0.0",
+    "chai": "^3.5.0",
+    "engine.io": "^1.6.8",
+    "engine.io-client": "^1.6.8",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
+    "mockery": "^1.4.1",
+    "primus": "^5.0.1",
+    "rethinkdb": "^2.2.2"
+  },
+  "peerDependencies": {
+    "rethinkdb": "^2.2.2"
+  }
+}
