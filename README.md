@@ -1,4 +1,4 @@
-# rethinkdb-primus
+# rethinkdb-primus  [![Build Status](https://travis-ci.org/tjmehta/rethinkdb-primus.svg)](https://travis-ci.org/tjmehta/rethinkdb-primus) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 Use rethinkdb over a primus connection
 
 # Installation
