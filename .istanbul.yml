@@ -1,0 +1,6 @@
+instrumentation:
+  root: .
+  extensions:
+      - .js
+  default-excludes: true
+  excludes: ['lib/rethinkdb-primus.client.js']

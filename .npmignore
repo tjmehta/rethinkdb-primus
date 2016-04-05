@@ -34,5 +34,4 @@ node_modules
 .node_repl_history
 
 # Custom
-lib
 test-browser/fixtures/primus-client.js
