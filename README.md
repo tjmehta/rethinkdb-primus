@@ -74,8 +74,10 @@ client.rethinkdbConnect(opts, function (err, conn) {
 rethinkdb-primus uses [validate-reql](https://github.com/tjmehta/validate-reql), which monkey patches rethinkdb w/ some new query methods for validation
 
 #### Example: Custom validation using refs: `r.rvRef`, `rvValidate`, and `r.rvOpt`
-// Place `r.rvRef('<name>')` in place of ReQL you want to manually validate in your whitelist ReQL
-// Note: if the actual value from the ReQL is a sequence of ReQL you will have to test it as Rethink AST
+Place `r.rvRef('<name>')` in place of ReQL you want to manually validate in your whitelist ReQL
+
+Note: if the actual value from the ReQL is a sequence of ReQL you will have to test it as Rethink AST
+
 ```js
 /*
   server.js
