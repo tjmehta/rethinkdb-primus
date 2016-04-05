@@ -35,3 +35,4 @@ node_modules
 
 # Custom
 lib
+test-browser/fixtures/primus-client.js
