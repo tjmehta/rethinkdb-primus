@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run test-node && npm run test-browser",
     "test-browser": "make build-browser && karma start test-browser/karmaconf.js",
-    "test-node": "make build && istanbul cover _mocha ./test && istanbul --text check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
+    "test-node": "make build && istanbul cover _mocha ./test && istanbul --text check-coverage --statements 90 --functions 90 --branches 90 --lines 90",
     "test-node-no-cov": "mocha ./test",
     "test-node-watch": "nodemon -x npm run test-node-no-cov"
   },
@@ -32,11 +32,10 @@
   },
   "homepage": "https://github.com/tjmehta/rethinkdb-primus",
   "dependencies": {
-    "binary-pack": "^1.0.2",
+    "101": "^1.5.0",
     "call-me-maybe": "^1.0.1",
     "debug": "^2.2.0",
     "keypather": "^2.0.0",
-    "listen-all": "^1.0.0",
     "object-loops": "^0.5.2",
     "propagate": "^0.4.0",
     "rethinkdb-stream-chunker": "^0.6.1",
@@ -44,6 +43,7 @@
     "shimmer": "^1.1.0"
   },
   "devDependencies": {
+    "binary-pack": "^1.0.2",
     "browserify": "^13.0.0",
     "buffer": "^4.5.1",
     "chai": "^3.5.0",
@@ -55,10 +55,7 @@
     "karma-browserify": "^5.0.3",
     "karma-chrome-launcher": "^0.2.3",
     "karma-mocha": "^0.2.2",
-    "karma-phantomjs-launcher": "^1.0.0",
     "mocha": "^2.4.5",
-    "mockery": "^1.4.1",
-    "phantomjs-prebuilt": "^2.1.7",
     "primus": "^5.0.1",
     "rethinkdb": "^2.2.2",
     "watchify": "^3.7.0"

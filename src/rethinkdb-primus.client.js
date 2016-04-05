@@ -1,4 +1,5 @@
 // note: this is a partial script see "make build"
+// the build is necessary to keep module.exports functional, but also bundle all dependencies into a single file
 var assert = require('assert')
 var maybe = require('call-me-maybe')
 var shimmer = require('shimmer')
