@@ -17,11 +17,11 @@ var primus = new Primus(server, {
   parser: 'binary'
 })
 
-primus.use('rethinkdb', require('rethinkdb-primus'))({
+primus.use('rethinkdb', require('rethinkdb-primus')({
   // rethinkdb connection options
   host: 'localhost',
   port: 28015,
-})
+}))
 
 primus.on('connection', function (spark) {
   // if you want the spark to be a rethinkdb connection
