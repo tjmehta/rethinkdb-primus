@@ -1,11 +1,5 @@
+// note: this is a partial script see "make build"
 var assert = require('assert')
-var net = require('net')
-// force require real net if node
-if (typeof nodeRequire !== 'undefined') {
-  // stub node "net" module instead of browser stub
-  net = nodeRequire('net') // browserify hack
-}
-
 var maybe = require('call-me-maybe')
 var shimmer = require('shimmer')
 
@@ -19,7 +13,11 @@ var MockSocket = require('./mock-socket.js')
  */
 primus.rethinkdbConnect = function (opts, cb) {
   assert(typeof opts === 'object', '"opts" is required')
-  assert(opts.rethinkdb, '"opts.rethinkdb" is required')
+  assert(opts.net, '"opts.net" is required (net module)')
+  assert(opts.process, '"opts.process" is required (net module)')
+  assert(opts.rethinkdb, '"opts.rethinkdb" is required (rethinkdb module)')
+  var net = opts.net
+  var process = opts.process
   var rethinkdb = opts.rethinkdb
   // stub connect
   shimmer.wrap(rethinkdb, 'connect', function (original) {
@@ -36,7 +34,9 @@ primus.rethinkdbConnect = function (opts, cb) {
       // stub
       process.browser = false
       net.connect = netConnectStub
+      net.connect = net.connect || function () {}
       // connect
+      opts.net = net
       var promise = original(opts)
       function netConnectStub (opts) {
         return new MockSocket(primus)

@@ -20,7 +20,7 @@ function createTable (cb) {
     debug('connection created')
     r.tableCreate(TABLE).run(conn, function (err) {
       debug('table created')
-      if (err && !/exists/.test(err.message)) { return cb(err) }
+      if (err && !/exist/.test(err.message)) { return cb(err) }
       conn.close()
       cb()
     })
@@ -38,7 +38,7 @@ function dropTable (cb) {
     if (err) { return cb(err) }
     debug('connection created')
     r.tableDrop(TABLE).run(conn, function (err) {
-      if (err && !/exists/.test(err.message)) { return cb(err) }
+      if (err && !/exist/.test(err.message)) { return cb(err) }
       debug('table dropped')
       conn.close()
       cb()

@@ -4,11 +4,11 @@
   "description": "Use rethinkdb over a primus connection",
   "main": "index.js",
   "scripts": {
-    "test": "npm run build && npm run test-server",
-    "test-server": "PORT=3001 istanbul cover _mocha ./test && istanbul --text check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
-    "test-server-no-cov": "PORT=3001 mocha ./test",
-    "test-watch": "PORT=3001 nodemon -x npm run test-server-no-cov",
-    "build": "make build"
+    "test": "npm run test-node && npm run test-browser",
+    "test-browser": "make build-browser && karma start test-browser/karmaconf.js",
+    "test-node": "make build && istanbul cover _mocha ./test && istanbul --text check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
+    "test-node-no-cov": "mocha ./test",
+    "test-node-watch": "nodemon -x npm run test-node-no-cov"
   },
   "repository": {
     "type": "git",
@@ -25,10 +25,6 @@
     "rethink",
     "web"
   ],
-  "browser": {
-    "net": "./src/net-tls-mock.js",
-    "tls": "./src/net-tls-mock.js"
-  },
   "author": "Tejesh Mehta",
   "license": "MIT",
   "bugs": {
@@ -50,14 +46,23 @@
   "devDependencies": {
     "assert-env": "^0.6.0",
     "browserify": "^13.0.0",
+    "buffer": "^4.5.1",
     "chai": "^3.5.0",
     "engine.io": "^1.6.8",
     "engine.io-client": "^1.6.8",
+    "envify": "^3.4.0",
     "istanbul": "^0.4.2",
+    "karma": "^0.13.22",
+    "karma-browserify": "^5.0.3",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-mocha": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.0",
     "mocha": "^2.4.5",
     "mockery": "^1.4.1",
+    "phantomjs-prebuilt": "^2.1.7",
     "primus": "^5.0.1",
-    "rethinkdb": "^2.2.2"
+    "rethinkdb": "^2.2.2",
+    "watchify": "^3.7.0"
   },
   "peerDependencies": {
     "rethinkdb": "^2.2.2"

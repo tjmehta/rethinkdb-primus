@@ -9,6 +9,7 @@ var beforeEach = global.beforeEach
 var afterEach = global.afterEach
 var it = global.it
 
+var net = require('net')
 var url = require('url')
 
 var expect = require('chai').expect
@@ -85,7 +86,9 @@ describe('Server tests', function () {
 
       it('should create a rethinkdb connection and run a query', function (done) {
         var opts = {
-          rethinkdb: rethinkdb
+          net: net,
+          rethinkdb: rethinkdb,
+          process: process
         }
         this.client.rethinkdbConnect(opts, function (err, conn) {
           if (err) { return done(err) }
@@ -97,11 +100,14 @@ describe('Server tests', function () {
             .run(conn, done)
         })
       })
+
       describe('errors', function () {
         it('should close connection if query is corrupt (socket error)', function (done) {
           var self = this
           var opts = {
-            rethinkdb: rethinkdb
+            net: net,
+            rethinkdb: rethinkdb,
+            process: process
           }
           this.client.rethinkdbConnect(opts, function (err, conn) {
             if (err) { return done(err) }
@@ -148,7 +154,9 @@ describe('Server tests', function () {
     it('should create connect, run an allowed query, and recieve response', function (done) {
       var query = this.queryWhitelist[0]
       var opts = {
-        rethinkdb: rethinkdb
+        net: net,
+        rethinkdb: rethinkdb,
+        process: process
       }
       this.client.rethinkdbConnect(opts, function (err, conn) {
         if (err) { return done(err) }
@@ -158,7 +166,9 @@ describe('Server tests', function () {
 
     it('should create connect, run a denied query, and recieve an error', function (done) {
       var opts = {
-        rethinkdb: rethinkdb
+        net: net,
+        rethinkdb: rethinkdb,
+        process: process
       }
       this.client.rethinkdbConnect(opts, function (err, conn) {
         if (err) { return done(err) }
@@ -178,7 +188,9 @@ describe('Server tests', function () {
       it('should close connection if query is corrupt (val/chunker error)', function (done) {
         var self = this
         var opts = {
-          rethinkdb: rethinkdb
+          net: net,
+          rethinkdb: rethinkdb,
+          process: process
         }
         this.client.rethinkdbConnect(opts, function (err, conn) {
           if (err) { return done(err) }
@@ -193,7 +205,9 @@ describe('Server tests', function () {
       it('should close connection if query is longer than max length', function (done) {
         var self = this
         var opts = {
-          rethinkdb: rethinkdb
+          net: net,
+          rethinkdb: rethinkdb,
+          process: process
         }
         this.client.rethinkdbConnect(opts, function (err, conn) {
           if (err) { return done(err) }
@@ -208,7 +222,9 @@ describe('Server tests', function () {
       it('should close connection if spark errors', function (done) {
         var self = this
         var opts = {
-          rethinkdb: rethinkdb
+          net: net,
+          rethinkdb: rethinkdb,
+          process: process
         }
         this.client.rethinkdbConnect(opts, function (err, conn) {
           if (err) { return done(err) }
@@ -225,7 +241,9 @@ describe('Server tests', function () {
       it('should close connection if responseChunker errors', function (done) {
         var self = this
         var opts = {
-          rethinkdb: rethinkdb
+          net: net,
+          rethinkdb: rethinkdb,
+          process: process
         }
         this.client.rethinkdbConnect(opts, function (err, conn) {
           if (err) { return done(err) }
@@ -242,7 +260,9 @@ describe('Server tests', function () {
       it('should close connection if validatorStream errors (unexpected validation error)', function (done) {
         var self = this
         var opts = {
-          rethinkdb: rethinkdb
+          net: net,
+          rethinkdb: rethinkdb,
+          process: process
         }
         this.client.rethinkdbConnect(opts, function (err, conn) {
           if (err) { return done(err) }
@@ -259,7 +279,9 @@ describe('Server tests', function () {
       it('should close connection if spark closes', function (done) {
         var self = this
         var opts = {
-          rethinkdb: rethinkdb
+          net: net,
+          rethinkdb: rethinkdb,
+          process: process
         }
         this.client.rethinkdbConnect(opts, function (err, conn) {
           if (err) { return done(err) }
@@ -332,7 +354,6 @@ describe('Server tests', function () {
 
       beforeEach(dbState.createTable)
       beforeEach(function (done) {
-        console.log('creawte2')
         this.client = createSocket()
         done()
       })
@@ -345,7 +366,9 @@ describe('Server tests', function () {
       it('should error if response handshake times out', function (done) {
         var self = this
         var opts = {
-          rethinkdb: rethinkdb
+          net: net,
+          rethinkdb: rethinkdb,
+          process: process
         }
         this.client.rethinkdbConnect(opts, function () {})
         this.client.once('open', function () {

@@ -1,6 +1,7 @@
 var EventEmitter = require('events').EventEmitter
 var util = require('util')
 
+var Buff = require('buffer/').Buffer
 var forEach = require('object-loops/for-each')
 var noop = require('101/noop')
 var propagate = require('propagate')
@@ -20,7 +21,6 @@ function MockSocket (primus) {
   propagate({
     'close': 'close', // TODO: close will probably not match 1:1???
     'open': 'connect',
-    'data': 'data',
     'drain': 'drain',
     'error': 'error',
     'end': 'end',
@@ -28,6 +28,12 @@ function MockSocket (primus) {
   }, this.primus, this)
   // mock readyState
   handleReadyStateChange()
+  this.primus.on('data', function (data) {
+    var buf = (data.constructor.name === 'Buffer')
+      ? data
+      : new Buff(data)
+    self.emit('data', buf)
+  })
   this.primus.on('readyStateChange', handleReadyStateChange)
   function handleReadyStateChange () {
     // if (this._connecting) { // not supported
