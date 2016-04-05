@@ -42,10 +42,33 @@ primus.on('connection', function (spark) {
 
 ### Client Example
 ```js
-var Primus =
+var net = require('net')
+
+var rethinkdb = require('rethinkdb')
+
+var client = new Primus()
+// The client monkey patches rethinkdb (and, temporarily, net and process)
+var opts = {
+  net: net,
+  process: process,
+  rethinkdb: rethinkdb
+}
+client.rethinkdbConnect(opts, function (err, conn) {
+  if (err) { return done(err) }
+  // run any query that is allowed by the whitelist
+  // if the query is not allowed the error message will start w/ "Query not allowed"
+  rethinkdb
+    .table('table')
+    .get('id')
+    .run(conn, function (err, data) {
+      if (err) { return done(err) }
+      expect(data).to.not.exist
+      done()
+    })
+})
 ```
 
-# Prior work credits
+# Credits
 Thank you [Mike Mintz](https://github.com/mikemintz)! Code is heavily inspired by [rethinkdb-websocket-server](https://github.com/mikemintz/rethinkdb-websocket-server)
 
 # License
