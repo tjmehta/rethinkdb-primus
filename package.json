@@ -38,13 +38,12 @@
     "keypather": "^2.0.0",
     "listen-all": "^1.0.0",
     "object-loops": "^0.5.2",
-    "propagate": "tjmehta/propagate#support-event-map",
+    "propagate": "^0.4.0",
     "rethinkdb-stream-chunker": "^0.6.1",
     "rethinkdb-validator-stream": "^1.1.1",
     "shimmer": "^1.1.0"
   },
   "devDependencies": {
-    "assert-env": "^0.6.0",
     "browserify": "^13.0.0",
     "buffer": "^4.5.1",
     "chai": "^3.5.0",
